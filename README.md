@@ -1,17 +1,29 @@
 ################## Описание 
+
 С учетом рекомендаций сделано "руками" следующее:
+
  - созданы две подсети в докере c ip 192.168.110.0/24(frontend)  192.168.111.0/24 (backend и database)
+ -
  - созданы три образа frontend (c multi-staging) postgres (pull-ом) backend (с добавлением в него файла entrypoint.sh)
+ -
  - руками поправлены строки в /frontend/src/*.* localhost:8000 на my_IP:8000
+ - 
  - /lib_catalog/lib_catalog/settings.py поправлен параметр ALLOWED_HOSTS = ['*'] (был пустой) и CORS_ORIGIN_ALLOW_ALL = True
+ - 
  - из-за того, что перевод строки в Windows 10 не дружит с bash, применялось в PowerShell (Get-Content entrypoint.sh -Raw).Replace("`r`n","`n") | Set-Content entrypoint.sh -Force
 
 ################## Полный перечень команд, введенных с консоли 
+
 docker network create --driver bridge --subnet 192.168.110.0/24 --ip-range 192.168.110.0/24 net110
+
 docker network create --driver bridge --subnet 192.168.111.0/24 --ip-range 192.168.111.0/24 net111
+
 docker pull postgres 
+
 docker build -t frontend -f Dockerfile1 .
+
 docker build -t backend -f Dockerfile2 .
+
 docker-compose up -d
 
 ################## Описание файлов
