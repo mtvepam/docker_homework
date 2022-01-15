@@ -16,9 +16,13 @@ docker-compose up -d
 
 ################## Описание файлов
 Dockerfile1  - docker файл для frontend, build c multi-staging
+
 Dockerfile2  - docker файл для backend, помимо рекомендованных requirements.txt, добавляет в образ entrypoint.sh 
+
 entrypoint.sh - скрипт для создания superuser админки django, содержит запуск "manage.py migrate" и "python parse_docx.py"
+
 .env - файл с переменными для создания пользователей superuser админки в backend  и django в БД
+
 docker-compose.yml c применением всего вышеуказанного (открытые порты и переопределение кредишенов пользователей только в нем, порты backend(8000) и database(5432) открывались для проверки и снятия скриншотов).
 
 С Уважением, Татьяна
