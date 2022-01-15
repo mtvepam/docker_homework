@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:8000/api/v1/lib/issue_city/';
+const API_URL = 'http://192.168.0.47:8000/api/v1/lib/issue_city/';
 
 export default class CityManager {
 

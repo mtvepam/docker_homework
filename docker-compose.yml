@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    database:
+        image: postgres:latest
+        restart: always
+        expose:
+          - '5432'
+        environment:
+          - POSTGRES_USER
+          - POSTGRES_PASSWORD
+        ports:
+          - '5432:5432'
+        networks:
+          - net111
+    frontend:
+        image: frontend:latest
+        expose:
+          - '80'
+        ports:
+          - '80:80'
+        networks:
+          - net110
+    backend:
+        image: backend:latest
+        command: bash /app/entrypoint.sh
+        expose:
+          - '8000'
+        environment:
+          - DJANGO_SUPERUSER_USERNAME
+          - DJANGO_SUPERUSER_EMAIL
+          - DJANGO_SUPERUSER_PASSWORD
+        ports:
+          - '8000:8000'
+        depends_on:
+          - database 
+        networks:
+          - net111
+networks:
+    net110: 
+    net111:
